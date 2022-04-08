@@ -9,9 +9,9 @@ let printMonth = function() {
 }
 
 let getBatchInfo = function() {
-    console.log('Uranium, W2D4, the topic for today is Nodejs module system assignment discussion')
+    console.log('Uranium, W2D5, the topic for today is Nodejs module system assignment completion')
 }
 
 module.exports.printTodaysDate = printDate
 module.exports.printCurrentMonth = printMonth
-module.exports.printBatchInformation = getBatchInfocd
+module.exports.printBatchInformation = getBatchInfo
