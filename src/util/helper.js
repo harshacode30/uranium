@@ -14,4 +14,4 @@ let getBatchInfo = function() {
 
 module.exports.printTodaysDate = printDate
 module.exports.printCurrentMonth = printMonth
-module.exports.printBatchInformation = getBatchInfo
+module.exports.printBatchInformation = getBatchInfocd
