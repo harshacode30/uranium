@@ -1,46 +1,83 @@
 const express = require('express');
-const loggermodule = require('../logger/logger')
-const helperModule = require('../util/helper')
-const formatterModule = require('../validator/formatter')
-const lodash = require('lodash')
-
 const router = express.Router();
 
-router.get('/test-me', function (req, res) {
-    loggermodule.welcomeMessage()
-    helperModule.printTodaysDate()
-    helperModule.printCurrentMonth()
-    helperModule.printBatchInformation()
-    formatterModule.trimString()
-    formatterModule.changeCaseToUpper()
-    formatterModule.changeCaseToLower()
-    res.send('My first ever api!')
+//Create an API for GET /movies that returns a list of movies. Define an array of movies in your code and return the value in response.
+
+
+router.get('/movies', function(req, res){
+    let movies = ["James-bond", "Dil", "Dhoom", "Sin-city", "Black-Friday"]
+    res.send(movies)
+})
+//Create an API GET /movies/:indexNumber (For example GET /movies/1 is a valid request and it should return the movie in your array at index 1). You can define an array of movies again in your api
+
+
+
+
+router.get('/movies/:number', function(req, res){
+    let movies = ["James-bond", "Dil", "Dhoom", "Sin-city", "Black-Friday"];
+    let index = req.params.number
+    if(index >= movies.length || index < 0 ){
+        res.send("Invalid input")
+    }else{
+    res.send(movies[index])
+    }
+})
+
+//Write another api called GET /films. Instead of an array of strings define an array of movie objects this time. Each movie object should have values - id, name. An example of movies array is 
+
+
+
+router.get('/films', function(req, res){
+    let films = [ {
+        id: 1,
+        name: "The Shining"
+       }, {
+        id: 2,
+        name: "Incendies"
+       }, {
+        id: 3,
+        name: "Rang de Basanti"
+       }, {
+        id: 4,
+        name: "Finding Demo"
+       }];
+       res.send(films)
+       
+})
+
+//Write api GET /films/:filmId where filmId is the value received in request path params. Use this value to return a movie object with this id. In case there is no such movie present in the array, return a suitable message in the response body. 
+router.get ('/films/:filmId', function(req, res){
+    let movieId  = req.params.filmId
+    let films =[ {
+        id: 1,
+        name: "The Shining"
+       }, {
+        id: 2,
+        name: "Incendies"
+       }, {
+        id: 3,
+        name: "Rang de Basanti"
+       }, {
+        id: 4,
+        name: "Finding Demo"
+       }];
+       let flag = false;
+        for(let i=0; i<films.length; i++){
+            let movieName = films[i]
+            if (movieName.id != movieId){
+                flag = false
+            }else {
+                 res.send(films[i])
+                 break;
+            }
+          
+        }
+        if(flag == false){
+            res.send("no such movie exist")
+        }
+       
+       
 });
 
-router.get('/hello', function (req, res) {
-    
-    let months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
-    let subArrays = lodash.chunk(months, 3)
-    console.log('The result after splitting the months array is ', subArrays)
-    
-
-    
-    let oddNumbers = [1,3,5,7,9,11,13,15,17,19]
-    console.log('The last 9 odd numbers in the array are: ', lodash.tail(oddNumbers))
-    
-    
-    let a = [1 , 2, 1, 4]
-    let b = [2, 3, 4, 3]
-    let c = [6, 1, 5, 10]
-    let d = [1, 1, 1]
-    let e = [1, 2, 3, 4, 5]
-    
-    console.log('Final array or unique numbers is : ', lodash.union(a, b, c, d, e))
-    
-    
-    let arrayOfKeyValuePairs = [["horror","The Shining"],["drama","Titanic"],["thriller","Shutter Island"],["fantasy","Pans Labyrinth"]]
-    console.log('The object created from arrays is :', lodash.fromPairs(arrayOfKeyValuePairs))
-        res.send('My hello api!')
-    });
 
 module.exports = router;
