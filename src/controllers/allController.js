@@ -5,7 +5,7 @@ const publisherModel = require('../models/publisher')
 
 // Intero
 const Intero=async function(req,res){
-    res.send("<h3>This API is dedicated to store the books , publishers , and authors in different models schema and understand refer and populate.<h2>Author Name : Sonu Verma</h2></h3>")
+    res.send("This API is dedicated to store the books , publishers , and authors in different models schema and understand refer and populate.Author Name : Harsha")
 }
 
 
